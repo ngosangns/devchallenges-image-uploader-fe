@@ -1,0 +1,1 @@
+export default "https://ngosangns-image-uploader.herokuapp.com/"

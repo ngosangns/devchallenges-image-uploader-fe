@@ -1,0 +1,47 @@
+@import "~vue-material/dist/theme/engine"; // Import the theme engine
+
+#upload-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  #uploader {
+    width: 40%;
+    min-width: 10rem;
+
+    #drag-uploader {
+      height: 30vh;
+      width: 80%;
+      margin: auto;
+      background-color: md-get-palette-color(cyan, 50);
+      border: .2rem dashed md-get-palette-color(cyan, 200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-top: 1rem;
+
+      #file-field {
+        padding-top: 100%; // Hide choose file button
+        overflow: hidden; // Keep size for input
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      #file-field:focus {
+        outline: none;
+      }
+
+      #title-uploader {
+        position: absolute;
+        z-index: 0;
+      }
+    }
+  }
+
+  #file-uploader {
+    margin: auto;
+  }
+}
