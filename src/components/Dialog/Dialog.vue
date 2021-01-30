@@ -2,7 +2,7 @@
     <md-dialog :md-active.sync="show" :md-backdrop="!['progress', 'uploaded'].includes(type)">
       <md-dialog-title>{{title}}</md-dialog-title>
 
-      <Progress v-if="type=='progress'" v-bind:amount="progressAmount"/>
+      <Progress v-if="type=='progress'" v-bind:amount="progressAmount.value"/>
       <Uploaded v-if="type=='uploaded'" v-bind:link="uploadedLink"/>
     </md-dialog>
 </template>

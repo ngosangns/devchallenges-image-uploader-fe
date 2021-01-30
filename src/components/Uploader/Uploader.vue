@@ -43,7 +43,9 @@ export default {
     dialogTitle: null,
     showDialog: null,
     dialogType: null,
-    progressAmount: null,
+    progressAmount: {
+      value: 0,
+    },
     uploadedLink: null,
     showSnackbar: false,
     snackbarContent: null
@@ -115,17 +117,17 @@ export default {
 
       axios({
         method: 'post',
-        url: host+"images",
+        url: host+"/images",
         data: formData,
         headers: {
           'Content-Type': 'multipart/form-data'
         },
-        onUploadProgress: function(progressEvent) {
+        onUploadProgress: (progressEvent) => {
           // Set progress amount
-          this.progressAmount = Math.round(progressEvent.loaded * 100 / progressEvent.total)
+          this.progressAmount.value = Math.round(progressEvent.loaded * 100 / progressEvent.total)
         },
       }).then(res => {
-        this.uploadedLink = host + "static/" + res.data.name
+        this.uploadedLink = res.data.link
         this.showDialog = true
         this.dialogTitle = null
         this.dialogType = "uploaded"

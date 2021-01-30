@@ -9,6 +9,23 @@ import 'vue-material/dist/theme/default.css'
 Vue.use(VueMaterial)
 Vue.config.productionTip = false
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
+let app = null
+
+function createApp() {
+  if(!app) {
+    app = new Vue({
+      render: h => h(App),
+    }).$mount('#app')
+  }
+  else {
+    app.$destroy()
+    app = null
+    createApp()
+  }
+}
+
+createApp()
+
+export default {
+  reloadApp: createApp,
+}

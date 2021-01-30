@@ -11,6 +11,7 @@
                 <md-icon>content_copy</md-icon>
             </div>
         </md-field>
+        <span v-on:click="clearState" id="re-upload">Upload another image</span>
 
         <md-snackbar :md-position="'center'" :md-duration="1000" :md-active.sync="showSnackbar" md-persistent>
             <span>Copied!</span>
@@ -19,6 +20,8 @@
 </template>
 
 <script>
+import main from "@/main.js"
+
 export default {
     name: "Uploaded",
     props: ["link"],
@@ -32,7 +35,10 @@ export default {
                 .then(() => {
                     this.showSnackbar = true
                 })
-        }
+        },
+        clearState() {
+            main.reloadApp()
+        },
     }
 }
 </script>
@@ -61,6 +67,12 @@ export default {
         #uploaded-title {
             font-size: 1.4rem;
             font-weight: normal;
+        }
+
+        #re-upload {
+            cursor: pointer;
+            color: green;
+            margin-top: 1rem;
         }
     }
 </style>
