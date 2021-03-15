@@ -11,9 +11,12 @@
       </md-card-header>
 
       <md-card-content>
-        File should be .jpg, .png, .jpeg
-        <div id="drag-uploader">
-          <input type="file" id="file-field" @change="drop"/>
+        <span id="description-uploader">File should be .jpg, .png, .jpeg</span>
+        <div v-on:drop.prevent="dropHandler" @dragenter.prevent @dragover.prevent id="drag-uploader">
+          <input type="file" id="file-field" v-on:change.prevent="dropHandler"/>
+          <div id="image-uploader">
+            <img src="/resources/mountains.svg">
+          </div>
           <span id="title-uploader">Drag & drop your image here</span>
         </div>
       </md-card-content>
@@ -58,30 +61,6 @@ export default {
     triggerUploadFile: function () {
       let fileField = document.getElementById("file-field");
       fileField.click();
-
-      fileField.onchange = function() {
-        // Checking
-        if(!this.check(fileField)) {
-          fileField.value = null
-          return
-        }
-
-        let file = fileField.files[0]
-        this.uploadImage(file)
-      };
-    },
-    drop: function(e) {
-      e.preventDefault()
-      let fileField = document.getElementById("file-field")
-
-      // Checking
-      if(!this.check(fileField)) {
-        fileField.value = null
-        return
-      }
-
-      let file = fileField.files[0]
-      this.uploadImage(file)
     },
     check: function(fileField) {
       // Check input has value yet
@@ -104,6 +83,22 @@ export default {
       }
 
       return true
+    },
+    dropHandler: function(e) {
+      let fileField = document.getElementById("file-field")
+
+      if(e["dataTransfer"]) {
+        fileField.files = e.dataTransfer.files
+      }
+
+      // Checking
+      if(!this.check(fileField)) {
+        fileField.value = null
+        return
+      }
+
+      let file = fileField.files[0]
+      this.uploadImage(file)
     },
     uploadImage: function(file) {
       // Create new form data
@@ -150,7 +145,19 @@ export default {
         throw new Error(err)
       })
     },
-  }
+  },
+  mounted: function() {
+    // document.getElementById("file-field").onchange = function() {
+    //   // Checking
+    //   if(!this.check(fileField)) {
+    //     fileField.value = null
+    //     return
+    //   }
+
+    //   let file = fileField.files[0]
+    //   this.uploadImage(file)
+    // };
+  },
 }
 </script>
 

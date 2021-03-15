@@ -23,4 +23,12 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+// Vue material setting
+.md-card, .md-dialog-container, .md-button, .md-progress-bar {
+  border-radius: .5rem!important;
+}
+.md-dialog-container {
+    max-height: fit-content!important;
+}
 </style>

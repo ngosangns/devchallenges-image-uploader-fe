@@ -53,6 +53,7 @@ export default {
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        max-width: 100%;
         width: 30rem;
 
         #uploaded-avatar {
@@ -67,6 +68,10 @@ export default {
         #uploaded-title {
             font-size: 1.4rem;
             font-weight: normal;
+        }
+
+        img {
+            border-radius: 1rem;
         }
 
         #re-upload {
